@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@inject Orchard.Settings.ISiteService SiteService
+@{
+    var site = await SiteService.GetSiteSettingsAsync();
+}
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -17,7 +21,7 @@
     <resources type="HeadScript" />
 
     @{
-        Title.AddSegment(T["Orchard"], "before");
+        Title.AddSegment(T[site.SiteName], "before");
     }
 
     <title>@Title.GenerateTitle()</title>
@@ -35,7 +39,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Project name</a>
+                <a class="navbar-brand" href="#">@site.SiteName</a>
             </div>
             <div id="navbar" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
